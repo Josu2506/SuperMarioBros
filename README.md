@@ -1,0 +1,1 @@
+This is my first "game", at least coding the beginning of one, and made me learn a lot from Js and phaser, doing the basics to develop a real 2D version of Mario Bros game. It can get better of course, this one is just a taste, I'm eager to keep learning and practicing Phaser and all it's power to build videogames with JavaScript.
