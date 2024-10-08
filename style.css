@@ -1,4 +1,10 @@
+@font-face{
+  font-family: "pixel";
+  src: url("assets/fonts/SuperMario.ttf");
+}
+
 body {
+  font-family: "pixel";
   display: grid;
   place-items: center;
   height: 100vh;
