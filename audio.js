@@ -11,6 +11,14 @@ const INIT_AUDIOS = [
     key: "coin",
     path: "assets/sound/effects/coin.mp3",
   },
+  {
+    key: "jump",
+    path: "assets/sound/effects/jump.mp3"
+  },
+  {
+    key: "consume-powerup",
+    path: "assets/sound/effects/consume-powerup.mp3"
+  }
 ];
 
 export const initAudio = ({ load }) => {

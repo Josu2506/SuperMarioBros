@@ -64,7 +64,7 @@ function create() {
   this.enemy = this.physics.add
     .sprite(120, config.height - 32, "goomba")
     .setOrigin(0, 1)
-    .setGravityY(300)
+    .setGravityY(400)
     .setVelocityX(-30);
   this.enemy.anims.play("goomba-walk", true);
 
@@ -102,6 +102,32 @@ function onCollectItem(mario, item) {
     playAudio("coin", this, { volume: 0.1 });
     addToScore(100, item, this);
   } else if (key === "supermushroom") {
+    this.physics.world.pause();
+    this.anims.pauseAll();
+
+    mario.isBlocked = true;
+    playAudio("consume-powerup", this, { volume: 0.1 });
+
+    mario.anims.play("mario-grown-idle", true);
+
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+
+      mario.anims.play(i % 2 === 0 ? "mario-grown-idle" : "mario-idle");
+    }, 100);
+
+
+
+    mario.isGrown = true;
+    setTimeout(() => {
+      mario.setDisplaySize(18, 32);
+      mario.body.setSize(18, 32);
+      mario.isBlocked = false;
+      clearInterval(interval);
+      this.physics.world.resume();
+      this.anims.resumeAll();
+    }, 1000);
   }
 }
 
@@ -131,7 +157,7 @@ function onHitEnemy(mario, enemy) {
   if (mario.body.touching.down && enemy.body.touching.up) {
     enemy.anims.play("goomba-dead", true);
     enemy.setVelocityX(0);
-    mario.setVelocityY(-200);
+    mario.setVelocityY(-100);
     playAudio("goomba-stomp", this);
     addToScore(50, enemy, this);
     setTimeout(() => {
@@ -162,7 +188,7 @@ function killMario(game) {
   mario.isDead = true;
   mario.anims.play("mario-dead");
   mario.setCollideWorldBounds(false);
-  playAudio("gameover", game, { volume: 0.2 });
+  playAudio("gameover", game, { volume: 0.1 });
 
   mario.body.checkCollision.none = true;
   mario.setVelocityX(0);
